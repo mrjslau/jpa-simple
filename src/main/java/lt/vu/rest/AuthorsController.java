@@ -24,21 +24,20 @@ public class AuthorsController {
         return authorsDAO.findOne(id);
     }
 
-    @Path("/{id}")
+    @Path("/{id}/{name}")
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
+    //@Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Response update(
             @PathParam("id") final Integer authorId,
-            Author authorData
+            @PathParam("name") final String authorName
     ) {
         try {
             Author existingAuthor = authorsDAO.findOne(authorId);
             if (existingAuthor == null) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
-            existingAuthor.setNickname(authorData.getNickname());
-            existingAuthor.setName(authorData.getName());
+            existingAuthor.setName(authorName);
             authorsDAO.update(existingAuthor);
             return Response.ok().build();
         } catch (OptimisticLockException ole) {

@@ -1,6 +1,7 @@
 package lt.vu.usecases;
 
 import lt.vu.interceptors.LoggedInvocation;
+import lt.vu.services.NicknameGen;
 import lt.vu.services.NicknameGenerator;
 
 import javax.enterprise.inject.Specializes;
@@ -10,10 +11,10 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-//@Specializes
+@Specializes
 public class SpecGenerateAuthorNickname extends GenerateAuthorNickname{
     @Inject
-    NicknameGenerator nicknameGenerator;
+    NicknameGen nicknameGenerator;
 
     private Future<String> nicknameGenerationTask = null;
 
